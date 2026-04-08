@@ -27,3 +27,13 @@ class Task:
         task.creation_date = data["creation_date"]
         task.completed = data["completed"] == "True" or data["completed"] is True
         return task
+    
+    def __str__(self):
+        status = "Completed" if self.completed else "Pending"
+        return (
+            f"Task ID: {self.task_id}\n"
+            f"Description: {self.description}\n"
+            f"Priority: {self.priority}\n"
+            f"Created: {self.creation_date}\n"
+            f"Status: {status}"
+        )

@@ -21,3 +21,11 @@ class TaskManager:
                 self.tasks.append(task)
         if self.tasks:
             self._next_id = max(t.task_id for t in self.tasks) + 1
+
+    def _save_tasks(self):
+        fieldnames = ["task_id", "description", "priority", "creation_date", "completed"]
+        with open(self.filepath, "w", newline="", encoding="utf-8") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            for task in self.tasks:
+                writer.writerow(task.to_dict())

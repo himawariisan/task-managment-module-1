@@ -29,3 +29,12 @@ class TaskManager:
             writer.writeheader()
             for task in self.tasks:
                 writer.writerow(task.to_dict())
+
+    def add_task(self, description, priority):
+        if not (1 <= priority <= 5):
+            raise ValueError("Priority must be between 1 and 5.")
+        task = Task(self._next_id, description, priority)
+        self._next_id += 1
+        self.tasks.append(task)
+        self._save_tasks()
+        return task

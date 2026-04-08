@@ -62,3 +62,16 @@ class TaskManager:
         self.tasks.remove(task)
         self._save_tasks()
         return task
+    
+    def list_tasks(self, sort_by="priority"):
+        if sort_by == "priority":
+            return sorted(self.tasks, key=lambda t: t.priority)
+        elif sort_by == "creation_date":
+            return sorted(self.tasks, key=lambda t: t.creation_date)
+        return list(self.tasks)
+
+    def _find_task(self, task_id):
+        for task in self.tasks:
+            if task.task_id == task_id:
+                return task
+        return None

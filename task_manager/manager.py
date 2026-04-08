@@ -45,3 +45,11 @@ class TaskManager:
             raise KeyError(f"Task with ID {task_id} not found.")
         self.tasks.remove(task)
         self._save_tasks()
+
+    def complete_task(self, task_id):
+        task = self._find_task(task_id)
+        if task is None:
+            raise KeyError(f"Task with ID {task_id} not found.")
+        task.mark_as_completed()
+        self._save_tasks()
+        return task

@@ -23,7 +23,11 @@ class Task:
 
     @classmethod
     def from_dict(cls, data):
-        task = cls(data["task_id"], data["description"], int(data["priority"]))
+        task = cls(
+            int(data["task_id"]),
+            data["description"],
+            int(data["priority"])
+        )
         task.creation_date = data["creation_date"]
         task.completed = data["completed"] == "True" or data["completed"] is True
         return task

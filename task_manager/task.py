@@ -8,3 +8,6 @@ class Task:
         self.priority = priority
         self.creation_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.completed = False
+    
+    def mark_as_completed(self):
+        self.completed = True

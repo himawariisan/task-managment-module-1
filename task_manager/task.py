@@ -8,7 +8,7 @@ class Task:
         self.priority = priority
         self.creation_date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         self.completed = False
-    
+
     def mark_as_completed(self):
         self.completed = True
 
@@ -29,9 +29,11 @@ class Task:
             int(data["priority"])
         )
         task.creation_date = data["creation_date"]
-        task.completed = data["completed"] == "True" or data["completed"] is True
+        task.completed = (
+            str(data.get("completed", "")).lower() in ["true", "1", "yes", "true"]
+        )
         return task
-    
+
     def __str__(self):
         status = "Completed" if self.completed else "Pending"
         return (
